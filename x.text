@@ -1,0 +1,123 @@
+Collections.sort(lst, Comparator.comparingInt(student -> student.products));
+
+
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+class User {
+    private String username;
+    private String email;
+    private Cart cart;
+
+    public User(String username, String email) {
+        this.username = username;
+        this.email = email;
+        this.cart = new Cart();
+    }
+
+    // Getters and setters for username and email
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    // Method to add a product to the cart
+    public void addToCart(Product product) {
+        cart.addProduct(product);
+    }
+
+    // Method to remove a product from the cart
+    public void removeFromCart(Product product) {
+        cart.removeProduct(product);
+    }
+
+    // Method to view items in the cart
+    public List<Product> viewCart() {
+        return cart.getProducts();
+    }
+}
+
+class Cart {
+    private List<Product> products;
+
+    public Cart() {
+        this.products = new ArrayList<>();
+    }
+
+    // Method to add a product to the cart
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
+    // Method to remove a product from the cart
+    public void removeProduct(Product product) {
+        products.remove(product);
+    }
+
+    // Method to get all products in the cart
+    public List<Product> getProducts() {
+        return products;
+    }
+}
+
+class Product {
+    private String name;
+    private double price;
+
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    // Getters and setters for name and price
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating a user
+        User user = new User("john_doe", "john@example.com");
+
+        // Creating some products
+        Product product1 = new Product("Laptop", 999.99);
+        Product product2 = new Product("Smartphone", 599.99);
+
+        // Adding products to the user's cart
+        user.addToCart(product1);
+        user.addToCart(product2);
+
+        // Viewing items in the cart
+        List<Product> cartItems = user.viewCart();
+        for (Product product : cartItems) {
+            System.out.println("Product: " + product.getName() + ", Price: $" + product.getPrice());
+        }
+    }
+}
